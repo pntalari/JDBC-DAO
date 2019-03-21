@@ -13,13 +13,13 @@ public abstract class Dao<T extends DTO> {
     }
 
 
-    public abstract Object findById(Integer id);
+    public abstract T findById(Integer id);
 
     public abstract List findAll();
 
-    public abstract Object update(Object dto);
+    public abstract T update(T dto);
 
-    public abstract Object create(Object dto);
+    public abstract T create(T dto);
 
     public abstract void delete(Integer id);
 }
