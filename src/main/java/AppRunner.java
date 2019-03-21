@@ -30,21 +30,45 @@ public class AppRunner {
 //                    car.getVinNum());
 
             //create car
-            Car car = new Car();
-            car.setId(12);
-            car.setMake("Porsche");
-            car.setModel("Mazerrati");
-            car.setYear(2019);
-            car.setColor("Blue");
-            car.setVinNum(708090100);
+//            Car car = new Car();
+//            car.setId(12);
+//            car.setMake("Porsche");
+//            car.setModel("Mazerrati");
+//            car.setYear(2019);
+//            car.setColor("Blue");
+//            car.setVinNum(708090100);
+//
+//            carDao.create(car);
+//            carDao.findById(car.getId());
+//
+//            System.out.println("The car inserted with id: " + car.getId() + " is: "
+//                    + car.getMake() + ", " + car.getModel() + ", " +
+//                    car.getColor() + ", " + car.getYear() + ", " +
+//                    car.getVinNum());
 
-            carDao.create(car);
-            carDao.findById(car.getId());
+            // update car
+//            Car car = new Car();
+//            car.setId(5);
+//            car.setModel("Toyota");
+//            car.setMake("Prius");
+//            car.setYear(2000);
+//            car.setColor("White");
+//            car.setVinNum(102030405);
+//
+//            carDao.update(car);
+//            System.out.println("The car updated with id: " + car.getId() + " is: "
+//                    + car.getMake() + ", " + car.getModel() + ", " +
+//                    car.getColor() + ", " + car.getYear() + ", " +
+//                    car.getVinNum());
 
-            System.out.println("The car inserted with id: " + car.getId() + " is: "
+            //delete car
+            Car car = carDao.findById(11);
+
+            System.out.println("The car delete with id: " + car.getId() + " is: "
                     + car.getMake() + ", " + car.getModel() + ", " +
                     car.getColor() + ", " + car.getYear() + ", " +
                     car.getVinNum());
+            carDao.delete(4);
 
         } catch (SQLException ex) {
 
