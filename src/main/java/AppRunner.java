@@ -4,6 +4,7 @@ import models.Car;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AppRunner {
 
@@ -24,13 +25,15 @@ public class AppRunner {
             //find the car
 //            Integer id = 3;
 //            Car car = carDao.findById(id);
+//
+//
 //            System.out.println("The car with id: " + id + " is: "
 //                    + car.getMake() + ", " + car.getModel() + ", " +
 //                    car.getColor() + ", " + car.getYear() + ", " +
 //                    car.getVinNum());
 
             //create car
-//            Car car = new Car();
+           // Car car = new Car();
 //            car.setId(12);
 //            car.setMake("Porsche");
 //            car.setModel("Mazerrati");
@@ -47,28 +50,39 @@ public class AppRunner {
 //                    car.getVinNum());
 
             // update car
-//            Car car = new Car();
-//            car.setId(5);
-//            car.setModel("Toyota");
-//            car.setMake("Prius");
-//            car.setYear(2000);
-//            car.setColor("White");
-//            car.setVinNum(102030405);
-//
-//            carDao.update(car);
-//            System.out.println("The car updated with id: " + car.getId() + " is: "
-//                    + car.getMake() + ", " + car.getModel() + ", " +
-//                    car.getColor() + ", " + car.getYear() + ", " +
-//                    car.getVinNum());
+            Car car = new Car();
+            car.setId(11);
+            car.setModel("Toyota");
+            car.setMake("Prius");
+            car.setYear(2000);
+            car.setColor("White");
+            car.setVinNum(102030405);
 
-            //delete car
-            Car car = carDao.findById(11);
+            carDao.update(car);
 
-            System.out.println("The car delete with id: " + car.getId() + " is: "
+            System.out.println("The car updated with id: " + car.getId() + " is: "
                     + car.getMake() + ", " + car.getModel() + ", " +
                     car.getColor() + ", " + car.getYear() + ", " +
                     car.getVinNum());
-            carDao.delete(4);
+
+            //delete car
+          //  Car car = carDao.findById(12);
+
+//            System.out.println("The car delete with id: " + car.getId() + " is: "
+//                    + car.getMake() + ", " + car.getModel() + ", " +
+//                    car.getColor() + ", " + car.getYear() + ", " +
+//                    car.getVinNum());
+//            carDao.delete(12);
+
+            //find all cars
+//            List<Car> carList = carDao.findAll();
+//            System.out.println("List of Cars:");
+//            for (Car car: carList) {
+//                System.out.println("Id: " + car.getId() + ",Make: "
+//                        + car.getMake() + ",Model: " + car.getModel() + ",Color: " +
+//                        car.getColor() + ",Year: " + car.getYear() + ",Vin: " +
+//                        car.getVinNum());
+//            }
 
         } catch (SQLException ex) {
 

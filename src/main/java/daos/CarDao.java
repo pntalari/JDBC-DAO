@@ -3,6 +3,7 @@ package daos;
 import models.Car;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarDao extends Dao<Car> {
@@ -14,6 +15,7 @@ public class CarDao extends Dao<Car> {
     private static final String UPDATE = "UPDATE car SET year = ?, make = ?, model = ?, color = ?, vin = ? " +
             "WHERE id = ?";
     private static final String DELETE = "DELETE FROM car WHERE id = ?";
+    private static final String ALL = "SELECT * FROM car";
 
     public CarDao(Connection conn) {
         super(conn);
@@ -69,17 +71,38 @@ public class CarDao extends Dao<Car> {
         return car;
     }
 
-    public List findAll() {
-        return null;
+    public List<Car> findAll() {
+
+        Car car = null;
+        List<Car> carList = new ArrayList<>();
+
+        try(PreparedStatement pStmt = this.connection.prepareStatement(ALL);){
+            ResultSet rs = pStmt.executeQuery();
+
+            while (rs.next()){
+                car = new Car();
+                car.setId(rs.getInt("id"));
+                car.setMake(rs.getString("make"));
+                car.setModel(rs.getString("model"));
+                car.setYear(rs.getInt("year"));
+                car.setColor(rs.getString("color"));
+                car.setVinNum(rs.getInt("vin"));
+
+                carList.add(car);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return carList;
     }
 
     @Override
     public Car update(Car dto) {
         Car car = null;
 
-        try {
-            this.connection.setAutoCommit(false);
-            PreparedStatement pStmt = this.connection.prepareStatement(UPDATE);
+        try (PreparedStatement pStmt = this.connection.prepareStatement(UPDATE)){;
             pStmt.setInt(1, dto.getYear());
             pStmt.setString(2, dto.getMake());
             pStmt.setString(3, dto.getModel());
@@ -88,8 +111,6 @@ public class CarDao extends Dao<Car> {
             pStmt.setInt(6, dto.getId());
 
             pStmt.executeUpdate();
-            this.connection.commit();
-            this.connection.setAutoCommit(true);
 
             car = this.findById(dto.getId());
 
@@ -103,8 +124,7 @@ public class CarDao extends Dao<Car> {
 
 
     public void delete(Integer id) {
-        try {
-            PreparedStatement pStmt = this.connection.prepareStatement(DELETE);
+        try (PreparedStatement pStmt = this.connection.prepareStatement(DELETE);){
             pStmt.setInt(1, id);
             pStmt.executeUpdate();
 
